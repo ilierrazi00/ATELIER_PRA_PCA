@@ -318,6 +318,35 @@ kubectl -n pra port-forward svc/flask 8080:80
 
 ---
 
+## Atelier 2 – Choix du point de restauration
+
+Actuellement, la restauration utilise automatiquement le dernier backup disponible.
+
+Pour améliorer le PRA, nous proposons de restaurer un backup spécifique.
+
+### Procédure :
+
+1. Lister les backups disponibles :
+
+```bash
+ls /backup
+```
+
+2. Identifier le fichier souhaité (ex: backup-2026-04-24-13-00.db)
+3. Adapter le job de restauration pour utiliser ce fichier spécifique.
+4. Lancer la restauration :
+```bash
+kubectl apply -f pra/50-job-restore.yaml
+```
+👉 Cette amélioration permet :
+
+- de revenir à un point précis dans le temps  
+- de limiter les pertes de données  
+- d’avoir un PRA plus flexible  
+
+👉 Limite actuelle :
+Le choix du backup est manuel, mais pourrait être automatisé (paramètre, API, interface…)
+
 ## Conclusion
 
 Cet atelier montre concrètement la différence entre :
